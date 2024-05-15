@@ -14,6 +14,48 @@
         <button class="change-list">Изменить список</button>
         <button class="exceptions">Исключения</button>
     </div>
+    <main></main>
+
+    <script>
+        const startGame = document.querySelector('.start-game');
+        const changeList = document.querySelector('.change-list');
+        const exceptions = document.querySelector('.exceptions');
+        
+        document.addEventListener('click', e => {
+            switch(e.target) {
+                case startGame:
+                    router('/game');
+                break;
+                case changeList:
+                    router('/change_list');
+                break;
+                case exceptions:
+                    router('/exceptions');
+                break;
+            }
+        })
+
+        function router(url) {
+            history.pushState(null, null, url);
+        }
+    </script>
 </body>
 
 </html>
+
+<!-- function uricheck() {
+    fetch('./public/changing-text.json')
+        .then(async (response) => {
+            const infos = await response.json();
+            if (document.location.pathname == "/") {
+                $('.info').html(infos.mainPage);
+            }
+            else if (document.location.pathname == "/history") {
+                $('.info').html(infos.historyPage);
+            }
+        })
+}
+$('.historyPage').on('click', function () {
+    history.pushState(null, null, '/history');
+    uricheck();
+}) -->
