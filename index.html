@@ -2,64 +2,76 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css" />
-    <title>Киношпионы</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Киношпионы</title>
 </head>
 
 <body>
-    <div class="menu">
-        <button class="start-game">Начать игру</button>
-        <button class="change-list">Изменить список</button>
-        <button class="exceptions">Исключения</button>
+  <div class="menu">
+    <button class="start-game">Начать игру</button>
+    <button class="change-list">Изменить список</button>
+    <button class="exceptions">Исключения</button>
+  </div>
+  <div class="main">
+    <div class="game">
+
     </div>
-    <div class="main"></div>
+  </div>
 
-    <script>
-        const menu = document.querySelector('.menu');
-        const startGame = document.querySelector('.start-game');
-        const changeList = document.querySelector('.change-list');
-        const exceptions = document.querySelector('.exceptions');
-        const main = document.querySelector('.main')
-        
-        document.addEventListener('click', e => {
-            switch(e.target) {
-                case startGame:
-                    router('/game');
-                break;
-                case changeList:
-                    router('/change_list');
-                break;
-                case exceptions:
-                    router('/exceptions');
-                break;
-            }
-        })
+  <script>
+    const menu = document.querySelector('.menu');
+    const startGame = document.querySelector('.start-game');
+    const changeList = document.querySelector('.change-list');
+    const exceptions = document.querySelector('.exceptions');
+    const main = document.querySelector('.main');
 
-        function router(url) {
-            history.pushState(null, null, url);
+    document.addEventListener('click', e => {
+      switch (e.target) {
+        case startGame:
+          router('/game');
+          break;
+        case changeList:
+          router('/change_list');
+          break;
+        case exceptions:
+          router('/exceptions');
+          break;
+      }
+    });
 
-            switch(url) {
-                case '/':
-                    main.style.display = 'none';
-                    menu.style.display = 'flex';
-                break;
-                case '/game':
-                    menu.style.display = 'none';
-                    main.style.display = 'flex';
-                break;
-                case '/change_list':
-                    menu.style.display = 'none';
-                    main.style.display = 'flex';
-                break;
-                case '/exceptions':
-                    menu.style.display = 'none';
-                    main.style.display = 'flex';
-                break;
-            }
-        }
-    </script>
+    window.addEventListener('popstate', () => {
+      if (document.location.pathname == '/index.html') {
+        main.style.display = 'none';
+        menu.style.display = 'flex';
+      }
+    })
+
+    function router(url) {
+      history.pushState(null, null, url);
+
+      switch (url) {
+        case '/index.html':
+          main.style.display = 'none';
+          menu.style.display = 'flex';
+          break;
+        case '/game':
+          menu.style.display = 'none';
+          main.style.display = 'flex';
+          break;
+        case '/change_list':
+          menu.style.display = 'none';
+          main.style.display = 'flex';
+          break;
+        case '/exceptions':
+          menu.style.display = 'none';
+          main.style.display = 'flex';
+          break;
+      }
+    }
+  </script>
 </body>
 
 </html>
