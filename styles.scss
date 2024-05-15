@@ -25,9 +25,15 @@ body {
     }
 }
 
-main {
+.main {
     display: none;
     flex-direction: column;
     margin-top: 50%;
     width: 90%;
+}
+
+.changing {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20%;
 }

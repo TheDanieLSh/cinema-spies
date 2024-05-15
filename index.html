@@ -16,8 +16,8 @@
     <button class="exceptions">Исключения</button>
   </div>
   <div class="main">
-    <div class="game">
-
+    <div class="changing">
+      
     </div>
   </div>
 
@@ -27,6 +27,8 @@
     const changeList = document.querySelector('.change-list');
     const exceptions = document.querySelector('.exceptions');
     const main = document.querySelector('.main');
+
+    let data = {};
 
     document.addEventListener('click', e => {
       switch (e.target) {
@@ -49,14 +51,13 @@
       }
     })
 
-    function router(url) {
+    async function router(url) {
       history.pushState(null, null, url);
 
+      const resp = await fetch('./movies.json');
+      data = await resp.json();
+
       switch (url) {
-        case '/index.html':
-          main.style.display = 'none';
-          menu.style.display = 'flex';
-          break;
         case '/game':
           menu.style.display = 'none';
           main.style.display = 'flex';

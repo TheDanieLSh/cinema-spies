@@ -24,4 +24,17 @@ body {
   height: 60px;
   margin: 15px 0;
   font-size: 15px;
+}
+
+.main {
+  display: none;
+  flex-direction: column;
+  margin-top: 50%;
+  width: 90%;
+}
+
+.changing {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20%;
 }/*# sourceMappingURL=styles.css.map */
