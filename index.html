@@ -14,12 +14,14 @@
         <button class="change-list">Изменить список</button>
         <button class="exceptions">Исключения</button>
     </div>
-    <main></main>
+    <div class="main"></div>
 
     <script>
+        const menu = document.querySelector('.menu');
         const startGame = document.querySelector('.start-game');
         const changeList = document.querySelector('.change-list');
         const exceptions = document.querySelector('.exceptions');
+        const main = document.querySelector('.main')
         
         document.addEventListener('click', e => {
             switch(e.target) {
@@ -37,25 +39,27 @@
 
         function router(url) {
             history.pushState(null, null, url);
+
+            switch(url) {
+                case '/':
+                    main.style.display = 'none';
+                    menu.style.display = 'flex';
+                break;
+                case '/game':
+                    menu.style.display = 'none';
+                    main.style.display = 'flex';
+                break;
+                case '/change_list':
+                    menu.style.display = 'none';
+                    main.style.display = 'flex';
+                break;
+                case '/exceptions':
+                    menu.style.display = 'none';
+                    main.style.display = 'flex';
+                break;
+            }
         }
     </script>
 </body>
 
 </html>
-
-<!-- function uricheck() {
-    fetch('./public/changing-text.json')
-        .then(async (response) => {
-            const infos = await response.json();
-            if (document.location.pathname == "/") {
-                $('.info').html(infos.mainPage);
-            }
-            else if (document.location.pathname == "/history") {
-                $('.info').html(infos.historyPage);
-            }
-        })
-}
-$('.historyPage').on('click', function () {
-    history.pushState(null, null, '/history');
-    uricheck();
-}) -->
