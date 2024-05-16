@@ -11,7 +11,7 @@ function App() {
     return (
         <Router>
             <Menu path="/" />
-            <Section path="/section" />
+            <Section path="/:section" />
         </Router>
     )
 }
