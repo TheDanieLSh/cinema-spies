@@ -1,9 +1,11 @@
 const fs = require('fs')
 const express = require('express')
+const cors = require('cors')
 
 const app = express()
+app.use(cors)
 
-app.get('/movies', (req, res) => {
+app.get('/get_movies', (req, res) => {
     res.send(JSON.parse(fs.readFileSync('./movies.json', 'utf8')))
 })
 
