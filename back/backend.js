@@ -3,6 +3,10 @@ const express = require('express')
 
 const app = express()
 
+app.get('/movies', (req, res) => {
+    res.send(JSON.parse(fs.readFileSync('./movies.json', 'utf8')))
+})
+
 app.get('/add', (req, res) => {
     const movie = req.query.param1
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
