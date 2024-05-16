@@ -1,5 +1,9 @@
 import { useEffect, useState } from "preact/hooks";
 
+import Game from './Game'
+import Edit from './Edit'
+import Exceptions from './Exceptions'
+
 export default function Section(props) {
     const { section } = props;
 
@@ -12,7 +16,11 @@ export default function Section(props) {
 
     return (
         <div className="section">
-
+            <div className={section}>
+                <Game path="/game" />
+                <Edit path="/change_list" />
+                <Exceptions path="/exceptions" />
+            </div>
         </div>
     )
 }
