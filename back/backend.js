@@ -1,9 +1,10 @@
 const fs = require('fs')
 const express = require('express')
-const cors = require('cors')
+const os = require('os')
+// const cors = require('cors')
 
 const app = express()
-app.use(cors())
+// app.use(cors())
 
 app.get('/get_movies', (req, res) => {
     res.send(JSON.parse(fs.readFileSync('./movies.json', 'utf8')))
@@ -34,4 +35,10 @@ app.put('/change_st', (req, res) => {
     fs.writeFileSync('./movies.json', JSON.stringify(json))
 })
 
-app.listen(4090, () => console.log('Server is running on port 4090'))
+
+const IP = Object.values(os.networkInterfaces()).flat()
+    .find(iface => iface.family == 'IPv4' && !iface.internal)?.address;
+
+PORT = 4090;
+
+app.listen(PORT, IP, () => console.log(`Server is running at ${IP + ':' + PORT}`))
