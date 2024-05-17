@@ -1,5 +1,4 @@
 import { render } from 'preact'
-import { useState } from 'preact/hooks'
 import Router from 'preact-router'
 import './styles.scss'
 

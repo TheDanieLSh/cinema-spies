@@ -3,7 +3,6 @@ import Router from 'preact-router'
 
 import Game from './Game'
 import Edit from './Edit'
-import Exceptions from './Exceptions'
 
 export default function Section(props) {
     const { section } = props;
@@ -21,7 +20,6 @@ export default function Section(props) {
                 <Router>
                     <Game path="/game" data={movies} />
                     <Edit path="/change_list" data={movies} />
-                    <Exceptions path="/exceptions" data={movies} />
                 </Router>
             </div>
         </div>
