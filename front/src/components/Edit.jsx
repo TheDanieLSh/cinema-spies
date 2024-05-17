@@ -1,9 +1,16 @@
+import AddFilmPopup from "./AddFilmPopup";
+
 export default function Edit(props) {
     const movies = props.data;
 
+    const openPopup = () => {
+        document.querySelector('.add-film-form').style.display = 'block';
+    }
+
     return (
         <>
-            <button>Добавить фильм</button>
+            <AddFilmPopup />
+            <button onClick={() => openPopup()}>Добавить фильм</button>
             <form className="movie-list">
                 {Object.keys(movies).map(name => (
                     <div className="movie-list__item">
