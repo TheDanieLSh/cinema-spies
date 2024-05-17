@@ -4,7 +4,7 @@ export default function AddFilmPopup() {
         const formData = new FormData(e.target);
         const filmName = formData.get('movie')
 
-        fetch('localhost:4090', {
+        fetch('localhost:4090/add', {
             method: 'PUT',
             body: filmName,
         });

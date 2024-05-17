@@ -3,13 +3,13 @@ const express = require('express')
 const cors = require('cors')
 
 const app = express()
-app.use(cors)
+app.use(cors())
 
 app.get('/get_movies', (req, res) => {
     res.send(JSON.parse(fs.readFileSync('./movies.json', 'utf8')))
 })
 
-app.get('/add', (req, res) => {
+app.put('/add', (req, res) => {
     const movie = req.query.param1
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
 
@@ -17,7 +17,7 @@ app.get('/add', (req, res) => {
     fs.writeFileSync('./movies.json', JSON.stringify(json))
 })
 
-app.get('/del', (req, res) => {
+app.put('/del', (req, res) => {
     const movie = req.query.param1
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
 
@@ -25,7 +25,7 @@ app.get('/del', (req, res) => {
     fs.writeFileSync('./movies.json', JSON.stringify(json))
 })
 
-app.get('/change_st', (req, res) => {
+app.put('/change_st', (req, res) => {
     const movie = req.query.param1
     const status = req.query.param2
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
@@ -34,4 +34,4 @@ app.get('/change_st', (req, res) => {
     fs.writeFileSync('./movies.json', JSON.stringify(json))
 })
 
-app.listen(4090, () => console.log('Server is active on port 4090'))
+app.listen(4090, () => console.log('Server is running on port 4090'))
