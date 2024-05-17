@@ -80,20 +80,32 @@ a {
         display: none;
         z-index: 1;
         position: absolute;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        bottom: 170px;
         width: 100%;
         height: 100dvh;
         text-align: center;
         background-color: rgba($color: white, $alpha: 0.95);
 
-        input {
-            width: 80%;
-            height: 30px;
-            border: 2px solid black;
-            border-radius: 6px;
+        form {
+            width: 100%;
+
+            input {
+                width: 80%;
+                height: 35px;
+                border: 2px solid black;
+                border-radius: 6px;
+            }
         }
         
         button {
             margin-top: 25px;
+        }
+
+        &__close-btn {
+            background-color: rgb(233, 106, 21);
         }
     }
 }

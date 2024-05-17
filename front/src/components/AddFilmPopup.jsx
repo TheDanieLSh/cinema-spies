@@ -10,14 +10,16 @@ export default function AddFilmPopup() {
         });
 
         document.querySelector('.add-film-form').style.display = 'none';
+        document.getElementById('movieNameInput').value = '';
     }
 
     return (
         <div className="add-film-form">
-            <form onSubmit={(e) => submit(e)}>
-                <input type="text" name="movie"></input>
+            <form onSubmit={(e) => submit(e)} autocomplete="off">
+                <input type="text" name="movie" id="movieNameInput"></input>
                 <button>Добавить</button>
             </form>
+            <button className="add-film-form__close-btn" onClick={() => {document.querySelector('.add-film-form').style.display = 'none';}}>Закрыть</button>
         </div>
     )
 }

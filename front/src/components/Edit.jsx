@@ -4,7 +4,7 @@ export default function Edit(props) {
     const movies = props.data;
 
     const openPopup = () => {
-        document.querySelector('.add-film-form').style.display = 'block';
+        document.querySelector('.add-film-form').style.display = 'flex';
     }
 
     return (
