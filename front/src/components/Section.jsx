@@ -10,10 +10,9 @@ export default function Section(props) {
     const [movies, setMovies] = useState({});
 
     useEffect(async () => {
-        const resp = await fetch('192.168.9.192:4090/get_movies');
-        console.log(resp);
-        setMovies(await resp.json());
-        console.log(movies);
+        await fetch('http://192.168.1.32:4090/get_movies')
+            .then(resp => resp.json())
+            .then(data => setMovies(data));
     }, []);
 
     return (
@@ -27,3 +26,6 @@ export default function Section(props) {
         </div>
     )
 }
+
+// 192.168.1.32:4090 - дом
+// 192.168.9.192:4090 - работа
