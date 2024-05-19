@@ -1,6 +1,5 @@
 export default function AddFilmPopup() {
     const submit = (e) => {
-        e.preventDefault();
         const formData = new FormData(e.target);
         const filmName = formData.get('movie');
 
@@ -10,8 +9,8 @@ export default function AddFilmPopup() {
             body: filmName,
         });
 
-        document.querySelector('.add-film-form').style.display = 'none';
-        document.getElementById('movieNameInput').value = '';
+        // document.querySelector('.add-film-form').style.display = 'none';
+        // document.getElementById('movieNameInput').value = '';
     }
 
     return (

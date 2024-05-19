@@ -11,7 +11,7 @@ app.get('/get_movies', (req, res) => {
 })
 
 app.put('/add', (req, res) => {
-    console.log(req.body);
+    console.log('Добавлен '+ req.body)
     const movie = req.body
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
 
