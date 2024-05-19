@@ -1,15 +1,18 @@
 const fs = require('fs')
 const express = require('express')
 const os = require('os')
+const cors = require('cors')
+const bodyParser = require('body-parser')
 
-const app = express()
+const app = express().use(cors()).use(bodyParser.text({ type: 'text/plain' }))
 
 app.get('/get_movies', (req, res) => {
     res.send(JSON.parse(fs.readFileSync('./movies.json', 'utf8')))
 })
 
 app.put('/add', (req, res) => {
-    const movie = req.query.param1
+    console.log(req.body);
+    const movie = req.body
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
 
     json[movie] = true
