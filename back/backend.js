@@ -7,17 +7,24 @@ const bodyParser = require('body-parser')
 const app = express().use(cors()).use(bodyParser.text({ type: 'text/plain' }))
 
 app.get('/get_movies', (req, res) => {
-    res.send(JSON.parse(fs.readFileSync('./movies.json', 'utf8')))
+    const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
+    res.send(json.movies)
 })
 
 app.put('/add', (req, res) => {
     const movie = req.body
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
 
-    json[movie] = true
+    json.movies[movie] = true
+    json.total = Object.keys(json.movies).reduce((acc, cur) => {
+        if (json.movies[cur] == true) acc++
+        return acc
+    }, 0)
+
     fs.writeFileSync('./movies.json', JSON.stringify(json, null, '\t'))
     
     console.log('Добавлен '+ req.body)
+    res.send('Success add!')
 })
 
 app.put('/del', (req, res) => {

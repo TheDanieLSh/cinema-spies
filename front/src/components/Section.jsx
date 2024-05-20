@@ -19,8 +19,8 @@ export default function Section(props) {
         <div className="section">
             <div className={section}>
                 <Router>
-                    <Game path="/game" data={movies} />
-                    <Edit path="/change_list" data={movies} />
+                    <Game path="/game" movies={movies} />
+                    <Edit path="/change_list" movies={movies} />
                 </Router>
             </div>
         </div>

@@ -1,8 +1,6 @@
 import AddFilmPopup from "./AddFilmPopup";
 
-export default function Edit(props) {
-    const movies = props.data;
-
+export default function Edit({ movies }) {
     const openPopup = () => {
         document.querySelector('.add-film-form').style.display = 'flex';
         document.body.style.overflow = 'hidden';
