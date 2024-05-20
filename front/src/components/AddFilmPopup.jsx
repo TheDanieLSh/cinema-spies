@@ -1,6 +1,6 @@
-export default function AddFilmPopup({ parentState, parentRerender }) {
-    const submit = (e) => {
-        // e.preventDefault();
+export default function AddFilmPopup() {
+    const submit = async (e) => {
+        e.preventDefault();
         const formData = new FormData(e.target);
         const filmName = formData.get('movie');
 
@@ -8,6 +8,8 @@ export default function AddFilmPopup({ parentState, parentRerender }) {
             method: 'PUT',
             headers: {'Content-Type': 'text/plain'},
             body: filmName,
+        }).then(() => {
+            window.location.replace(window.location.pathname);
         });
     }
 
@@ -17,7 +19,10 @@ export default function AddFilmPopup({ parentState, parentRerender }) {
                 <input type="text" name="movie" id="movieNameInput"></input>
                 <button>Добавить</button>
             </form>
-            <button className="add-film-form__close-btn" onClick={() => {document.querySelector('.add-film-form').style.display = 'none';}}>Закрыть</button>
+            <button className="add-film-form__close-btn" onClick={() => {
+                document.querySelector('.add-film-form').style.display = 'none';
+                document.body.style.overflow = 'visible';
+            }}>Закрыть</button>
         </div>
     )
 }
