@@ -1,3 +1,4 @@
+import { useState } from "preact/hooks";
 import AddFilmPopup from "./AddFilmPopup";
 
 export default function Edit(props) {
@@ -7,9 +8,11 @@ export default function Edit(props) {
         document.querySelector('.add-film-form').style.display = 'flex';
     }
 
+    const [editState, editRerender] = useState(true);
+
     return (
         <>
-            <AddFilmPopup />
+            <AddFilmPopup parentState={editState} parentRerender={editRerender} />
             <button onClick={() => openPopup()}>Добавить фильм</button>
             <form className="movie-list">
                 {Object.keys(movies).map(name => (

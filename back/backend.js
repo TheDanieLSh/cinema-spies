@@ -11,12 +11,13 @@ app.get('/get_movies', (req, res) => {
 })
 
 app.put('/add', (req, res) => {
-    console.log('Добавлен '+ req.body)
     const movie = req.body
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
 
     json[movie] = true
-    fs.writeFileSync('./movies.json', JSON.stringify(json))
+    fs.writeFileSync('./movies.json', JSON.stringify(json, null, '\t'))
+    
+    console.log('Добавлен '+ req.body)
 })
 
 app.put('/del', (req, res) => {

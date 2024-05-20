@@ -1,16 +1,14 @@
-export default function AddFilmPopup() {
+export default function AddFilmPopup({ parentState, parentRerender }) {
     const submit = (e) => {
+        // e.preventDefault();
         const formData = new FormData(e.target);
         const filmName = formData.get('movie');
 
-        fetch('http://192.168.1.32:4090/add', {
+        fetch('http://192.168.9.192:4090/add', {
             method: 'PUT',
             headers: {'Content-Type': 'text/plain'},
             body: filmName,
         });
-
-        // document.querySelector('.add-film-form').style.display = 'none';
-        // document.getElementById('movieNameInput').value = '';
     }
 
     return (
