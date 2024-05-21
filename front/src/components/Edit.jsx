@@ -10,7 +10,8 @@ export default function Edit({ movies }) {
         <>
             <AddFilmPopup />
             <button onClick={() => openPopup()}>Добавить фильм</button>
-            <form className="movie-list">
+            {movies &&
+                <form className="movie-list">
                 {Object.keys(movies).map(name => (
                     <div className="movie-list__item">
                         <label>{name}</label>
@@ -19,6 +20,7 @@ export default function Edit({ movies }) {
                 ))}
                 <button>Сохранить</button>
             </form>
+            }
         </>
     )
 }

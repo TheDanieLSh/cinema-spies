@@ -7,8 +7,9 @@ const bodyParser = require('body-parser')
 const app = express().use(cors()).use(bodyParser.text({ type: 'text/plain' }))
 
 app.get('/get_movies', (req, res) => {
-    const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
-    res.send(json.movies)
+    res.set('Content-Type', 'application/json')
+    res.send(fs.readFileSync('./movies.json', 'utf8'))
+    res.end()
 })
 
 app.put('/add', (req, res) => {

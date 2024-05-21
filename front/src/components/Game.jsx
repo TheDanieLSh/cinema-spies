@@ -3,7 +3,7 @@ import { useState } from "preact/hooks";
 let numberOfPlayers = null;
 let givenRoleCount = 0;
 
-export default function Game({ movies }) {
+export default function Game({ movies, total }) {
     const [stage, setStage] = useState('player_number');
 
     const submit = (e) => {
@@ -15,7 +15,10 @@ export default function Game({ movies }) {
     }
 
     if (stage === 'role_giving') {
-        
+        console.log(total);
+        console.log(Math.random() * total);
+        const curMovie = movies[Math.random() * total];
+        console.log(curMovie);
     }
 
     return (
@@ -26,7 +29,7 @@ export default function Game({ movies }) {
                     <input type="number" name="players_count" autocomplete="off"></input>
                     <button>Далее</button>
                 </form>
-            },
+            }
             {stage === 'role_giving' &&
                 <div className="role">
 

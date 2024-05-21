@@ -7,20 +7,20 @@ import Edit from './Edit'
 export default function Section(props) {
     const { section } = props;
 
-    const [movies, setMovies] = useState({});
+    const [data, setData] = useState({});
 
     useEffect(async () => {
         await fetch('http://192.168.9.192:4090/get_movies')
             .then(resp => resp.json())
-            .then(data => setMovies(data));
+            .then(data => setData(data));
     }, []);
 
     return (
         <div className="section">
             <div className={section}>
                 <Router>
-                    <Game path="/game" movies={movies} />
-                    <Edit path="/change_list" movies={movies} />
+                    <Game path="/game" movies={data.movies} total={data.total} />
+                    <Edit path="/change_list" movies={data.movies} />
                 </Router>
             </div>
         </div>
