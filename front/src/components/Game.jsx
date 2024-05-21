@@ -15,10 +15,7 @@ export default function Game({ movies, total }) {
     }
 
     if (stage === 'role_giving') {
-        console.log(total);
-        console.log(Math.random() * total);
-        const curMovie = movies[Math.random() * total];
-        console.log(curMovie);
+        const curMovie = Object.keys(movies)[Math.floor(Math.random() * total)];
     }
 
     return (

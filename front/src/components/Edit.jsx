@@ -12,14 +12,14 @@ export default function Edit({ movies }) {
             <button onClick={() => openPopup()}>Добавить фильм</button>
             {movies &&
                 <form className="movie-list">
-                {Object.keys(movies).map(name => (
-                    <div className="movie-list__item">
-                        <label>{name}</label>
-                        <input type="checkbox" checked={movies[name]} />
-                    </div>
-                ))}
-                <button>Сохранить</button>
-            </form>
+                    {Object.keys(movies).map(name => (
+                        <div className="movie-list__item">
+                            <label>{name}</label>
+                            <input type="checkbox" checked={movies[name]} />
+                        </div>
+                    ))}
+                    <button>Сохранить</button>
+                </form>
             }
         </>
     )
