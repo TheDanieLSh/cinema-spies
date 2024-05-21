@@ -28,8 +28,8 @@ app.put('/add', (req, res) => {
     res.send('Success add!')
 })
 
-app.put('/del', (req, res) => {
-    const movie = req.query.param1
+app.delete('/del', (req, res) => {
+    const movie = req.params.name
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
 
     delete json[movie]
