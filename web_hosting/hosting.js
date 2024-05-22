@@ -1,28 +1,46 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
+import { serve } from "https://deno.land/std/http/server.ts";
+import { extname } from "https://deno.land/std/path/mod.ts";
+import { lookup } from "https://deno.land/x/media_types/mod.ts";
 
-const server = http.createServer((req, res) => {
-    const filePath = path.join(__dirname, 'public', req.url === '/' ? 'index.html' : req.url);
-    const contentType = 'text/html';
-
-    fs.readFile(filePath, (err, content) => {
-        if (err) {
-            res.writeHead(404);
-            res.end('Page not found');
+const getLocalIP = () => {
+    const networkInterfaces = Deno.networkInterfaces();
+    for (const netInterface of networkInterfaces) {
+        if (Array.isArray(netInterface)) {
+            for (const net of netInterface) {
+                if (net.family === 'IPv4' && !net.internal) {
+                    return net.address;
+                }
+            }
         } else {
-            res.writeHead(200, { 'Content-Type': contentType });
-            res.end(content);
+            if (netInterface.family === 'IPv4' && !netInterface.internal) {
+                return netInterface.address;
+            }
         }
-    });
-});
+    }
+};
 
-const IP = Object.values(os.networkInterfaces()).flat()
-    .find(iface => iface.family == 'IPv4' && !iface.internal)?.address;
+const IP = getLocalIP();
+const PORT = 3000;
 
-const PORT = process.env.PORT || 3000;
+const handler = async (req) => {
+    const url = new URL(req.url);
+    const filePath = url.pathname === "/" ? "./public/index.html" : `./public${url.pathname}`;
 
-server.listen(PORT, IP, () => {
-    console.log(`Server running on ${IP + ':'+ PORT}/`);
-});
+    try {
+        const fileContent = await Deno.readFile(filePath);
+        const contentType = lookup(extname(filePath)) || "text/plain";
+        return new Response(fileContent, {
+            status: 200,
+            headers: { "Content-Type": contentType },
+        });
+    } catch (error) {
+        if (error instanceof Deno.errors.NotFound) {
+            return new Response("Page not found", { status: 404 });
+        } else {
+            return new Response("Internal server error", { status: 500 });
+        }
+    }
+};
+
+console.log(`HTTP webserver is running at: http://${IP}:${PORT}`);
+await serve(handler, { hostname: IP, port: PORT });

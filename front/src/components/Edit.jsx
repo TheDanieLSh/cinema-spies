@@ -13,7 +13,7 @@ export default function Edit({ movies }) {
         const payload = {};
         checkboxes.forEach(cb => payload[cb.name] = cb.checked);
         
-        fetch('http://192.168.9.192:4090/change_st', {
+        fetch('http://192.168.1.32:4090/change_st', {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(payload),
