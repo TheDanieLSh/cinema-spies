@@ -11,23 +11,25 @@ export default function Game({ movies, total }) {
         const playersCount = new FormData(e.target).get('players_count');
         if (playersCount < 4) return;
         setStage('role_giving');
-        numberOfPlayers = playersCount;
+        numberOfPlayers = +playersCount;
     }
 
-    if (stage === 'role_giving') {
+    if (stage == 'role_giving') {
         const curMovie = Object.keys(movies)[Math.floor(Math.random() * total)];
+        const roles = new Array(numberOfPlayers).fill(curMovie);
+        roles[Math.floor(Math.random() * numberOfPlayers)] = 'Шпион';
     }
 
     return (
         <>
-            {stage === 'player_number' &&
+            {stage == 'player_number' &&
                 <form onSubmit={(e) => submit(e)}>
                     <label>Введите количество игроков</label>
                     <input type="number" name="players_count" autocomplete="off"></input>
                     <button>Далее</button>
                 </form>
             }
-            {stage === 'role_giving' &&
+            {stage == 'role_giving' &&
                 <div className="role">
 
                 </div>

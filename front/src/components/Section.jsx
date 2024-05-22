@@ -18,10 +18,13 @@ export default function Section(props) {
     return (
         <div className="section">
             <div className={section}>
-                <Router>
-                    <Game path="/game" movies={data.movies} total={data.total} />
-                    <Edit path="/change_list" movies={data.movies} />
-                </Router>
+                {Object.keys(data) != 0 &&
+                
+                    <Router>
+                        <Game path="/game" movies={data.movies} total={data.total} />
+                        <Edit path="/change_list" movies={data.movies} />
+                    </Router>
+                }
             </div>
         </div>
     )
