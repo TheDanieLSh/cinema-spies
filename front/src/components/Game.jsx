@@ -1,4 +1,5 @@
 import { useState } from "preact/hooks";
+import Role from "./Role";
 
 let numberOfPlayers = null;
 let givenRoleCount = 0;
@@ -14,9 +15,11 @@ export default function Game({ movies, total }) {
         numberOfPlayers = +playersCount;
     }
 
+    let roles = [];
+
     if (stage == 'role_giving') {
         const curMovie = Object.keys(movies)[Math.floor(Math.random() * total)];
-        const roles = new Array(numberOfPlayers).fill(curMovie);
+        roles = new Array(numberOfPlayers).fill(curMovie);
         roles[Math.floor(Math.random() * numberOfPlayers)] = 'Шпион';
     }
 
@@ -30,9 +33,7 @@ export default function Game({ movies, total }) {
                 </form>
             }
             {stage == 'role_giving' &&
-                <div className="role">
-
-                </div>
+                <Role roles={roles} />
             }
         </>
     )
