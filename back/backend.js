@@ -4,7 +4,9 @@ const os = require('os')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
-const app = express().use(cors()).use(bodyParser.text({ type: 'text/plain' }))
+const app = express().use(cors())
+    .use(bodyParser.text({ type: 'text/plain' }))
+    .use(bodyParser.json())
 
 app.get('/get_movies', (req, res) => {
     res.set('Content-Type', 'application/json')
@@ -23,26 +25,36 @@ app.put('/add', (req, res) => {
     }, 0)
 
     fs.writeFileSync('./movies.json', JSON.stringify(json, null, '\t'))
+
+    console.log('Добавлен ' + req.body)
+    res.end()
+})
+
+app.patch('/change_st', (req, res) => {
+    const payload = req.body
+    const json = {}
+
+    json.movies = payload
+    json.total = Object.keys(json.movies).reduce((acc, cur) => {
+        if (json.movies[cur] == true) acc++
+        return acc
+    }, 0)
+
+    fs.writeFileSync('./movies.json', JSON.stringify(json, null, '\t'))
     
-    console.log('Добавлен '+ req.body)
-    res.send('Success add!')
+    console.log('Статусы обновлены');
+    res.end()
 })
 
 app.delete('/del', (req, res) => {
-    const movie = req.params.name
+    const movie = req.body
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
 
     delete json[movie]
-    fs.writeFileSync('./movies.json', JSON.stringify(json))
-})
+    fs.writeFileSync('./movies.json', JSON.stringify(json, null, '\t'))
 
-app.put('/change_st', (req, res) => {
-    const movie = req.query.param1
-    const status = req.query.param2
-    const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
-
-    json[movie] = status
-    fs.writeFileSync('./movies.json', JSON.stringify(json))
+    console.log('Лот(ы) удален(ы)')
+    res.end()
 })
 
 

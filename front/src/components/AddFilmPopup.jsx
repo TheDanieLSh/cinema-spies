@@ -9,7 +9,6 @@ export default function AddFilmPopup() {
             headers: {'Content-Type': 'text/plain'},
             body: filmName,
         }).then(() => {
-            console.log(true);
             window.location.replace(window.location.pathname);
         });
     }
