@@ -50,10 +50,15 @@ app.delete('/del', (req, res) => {
     const movie = req.body
     const json = JSON.parse(fs.readFileSync('./movies.json', 'utf8'))
 
-    delete json[movie]
+    delete json.movies[movie]
+    json.total = Object.keys(json.movies).reduce((acc, cur) => {
+        if (json.movies[cur] == true) acc++
+        return acc
+    }, 0)
+
     fs.writeFileSync('./movies.json', JSON.stringify(json, null, '\t'))
 
-    console.log('Лот(ы) удален(ы)')
+    console.log('Лот удален')
     res.end()
 })
 

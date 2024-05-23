@@ -20,8 +20,14 @@ export default function Edit({ movies }) {
         }).then(() => route('/'));
     }
 
-    const deleteItem = () => {
-        confirm()
+    const deleteItem = (e) => {
+        if (confirm('Удалить этот фильм?')) {
+            fetch('http://192.168.9.192:4090/del', {
+                method: 'DELETE',
+                headers: {'Content-Type': 'text/plain'},
+                body: e.target.textContent,
+            }).then(() => window.location.replace(window.location.pathname));
+        }
     }
 
     return (
