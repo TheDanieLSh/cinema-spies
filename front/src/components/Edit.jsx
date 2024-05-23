@@ -12,10 +12,10 @@ export default function Edit({ movies, IP }) {
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         const payload = {};
         checkboxes.forEach(cb => payload[cb.name] = cb.checked);
-        
+
         fetch(`http://${IP}/change_st`, {
             method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
         }).then(() => route('/'));
     }
@@ -24,7 +24,7 @@ export default function Edit({ movies, IP }) {
         if (confirm('Удалить этот фильм?')) {
             fetch(`http://${IP}/del`, {
                 method: 'DELETE',
-                headers: {'Content-Type': 'text/plain'},
+                headers: { 'Content-Type': 'text/plain' },
                 body: e.target.textContent,
             }).then(() => window.location.replace(window.location.pathname));
         }

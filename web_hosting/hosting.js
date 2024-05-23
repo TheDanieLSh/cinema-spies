@@ -41,5 +41,4 @@ const handler = async (req) => {
     }
 };
 
-console.log(`HTTP webserver is running at: http://${IP}:${PORT}`);
 await serve(handler, { hostname: IP, port: PORT });

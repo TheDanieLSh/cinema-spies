@@ -7,7 +7,7 @@ import Menu from './components/Menu'
 import Section from './components/Section'
 
 function App() {
-    const IP = '192.168.9.192:4090';
+    const IP = '192.168.1.32:4090';
 
     return (
         <Router>
