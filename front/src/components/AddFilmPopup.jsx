@@ -7,7 +7,7 @@ export default function AddFilmPopup({ IP }) {
         fetch(`http://${IP}/add`, {
             method: 'PUT',
             headers: { 'Content-Type': 'text/plain' },
-            body: filmName,
+            body: filmName.trim(),
         }).then(() => {
             window.location.replace(window.location.pathname);
         });
