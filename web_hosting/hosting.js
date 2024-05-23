@@ -5,24 +5,37 @@ import { lookup } from "https://deno.land/x/media_types/mod.ts";
 const IP = Deno.networkInterfaces()
     .flat()
     .find(iface => iface.family === 'IPv4' && !iface.internal)?.address;
-    
+
 const PORT = 3000;
 
 const handler = async (req) => {
     const url = new URL(req.url);
-    const filePath = url.pathname == "/" ? "./dist/index.html" : `./dist${url.pathname}`;
+    const filePath = `./dist${url.pathname}`;
 
     try {
         const fileContent = await Deno.readFile(filePath);
         const contentType = lookup(extname(filePath)) || "text/plain";
+
         return new Response(fileContent, {
             status: 200,
             headers: { "Content-Type": contentType },
         });
-    } catch (error) {
-        if (error instanceof Deno.errors.NotFound) {
-            return new Response("Page not found", { status: 404 });
+    } catch (err) {
+        if (err instanceof Deno.errors.NotFound) {
+
+            try {
+                const indexContent = await Deno.readFile("./dist/index.html");
+                return new Response(indexContent, {
+                    status: 200,
+                    headers: { "Content-Type": "text/html" },
+                });
+            } catch (err) {
+                console.log(err);
+                return new Response("Internal server error", { status: 500 });
+            }
+
         } else {
+            console.log(err);
             return new Response("Internal server error", { status: 500 });
         }
     }
