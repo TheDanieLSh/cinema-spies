@@ -2,29 +2,15 @@ import { serve } from "https://deno.land/std/http/server.ts";
 import { extname } from "https://deno.land/std/path/mod.ts";
 import { lookup } from "https://deno.land/x/media_types/mod.ts";
 
-const getLocalIP = () => {
-    const networkInterfaces = Deno.networkInterfaces();
-    for (const netInterface of networkInterfaces) {
-        if (Array.isArray(netInterface)) {
-            for (const net of netInterface) {
-                if (net.family === 'IPv4' && !net.internal) {
-                    return net.address;
-                }
-            }
-        } else {
-            if (netInterface.family === 'IPv4' && !netInterface.internal) {
-                return netInterface.address;
-            }
-        }
-    }
-};
-
-const IP = getLocalIP();
+const IP = Deno.networkInterfaces()
+    .flat()
+    .find(iface => iface.family === 'IPv4' && !iface.internal)?.address;
+    
 const PORT = 3000;
 
 const handler = async (req) => {
     const url = new URL(req.url);
-    const filePath = url.pathname === "/" ? "./dist/index.html" : `./dist${url.pathname}`;
+    const filePath = url.pathname == "/" ? "./dist/index.html" : `./dist${url.pathname}`;
 
     try {
         const fileContent = await Deno.readFile(filePath);
