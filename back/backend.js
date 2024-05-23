@@ -8,6 +8,7 @@ const app = express().use(cors())
     .use(bodyParser.text({ type: 'text/plain' }))
     .use(bodyParser.json())
 
+
 app.get('/get_movies', (req, res) => {
     res.set('Content-Type', 'application/json')
     res.send(fs.readFileSync('./movies.json', 'utf8'))

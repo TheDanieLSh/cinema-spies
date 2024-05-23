@@ -1,12 +1,12 @@
-export default function AddFilmPopup() {
+export default function AddFilmPopup({ IP }) {
     const submit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const filmName = formData.get('movie');
 
-        fetch('http://192.168.9.192:4090/add', {
+        fetch(`http://${IP}/add`, {
             method: 'PUT',
-            headers: {'Content-Type': 'text/plain'},
+            headers: { 'Content-Type': 'text/plain' },
             body: filmName,
         }).then(() => {
             window.location.replace(window.location.pathname);

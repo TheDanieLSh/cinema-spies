@@ -1,5 +1,5 @@
 import { render } from 'preact'
-// import { useEffect, useState } from 'preact/hooks'
+import { useState } from 'preact/hooks'
 import Router from 'preact-router'
 import './styles.scss'
 
@@ -7,7 +7,23 @@ import Menu from './components/Menu'
 import Section from './components/Section'
 
 function App() {
-    // const [IP, setIP] = useState('');
+    const IP = '192.168.9.192:4090';
+
+    return (
+        <Router>
+            <Menu path="/" />
+            <Section path="/:section" IP={IP} />
+        </Router>
+    )
+}
+
+render(<App />, document.getElementById('app'));
+
+// 192.168.1.32:4090 - дом
+// 192.168.9.192:4090 - работа
+
+
+// const [IP, setIP] = useState('');
 
     // useEffect(() => {
     //     fetch('https://api.ipify.org?format=json')
@@ -16,13 +32,3 @@ function App() {
     // }, []);
 
     // console.log(IP);
-
-    return (
-        <Router>
-            <Menu path="/" />
-            <Section path="/:section" />
-        </Router>
-    )
-}
-
-render(<App />, document.getElementById('app'));

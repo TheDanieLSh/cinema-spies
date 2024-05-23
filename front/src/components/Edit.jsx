@@ -1,7 +1,7 @@
 import AddFilmPopup from "./AddFilmPopup";
 import { route } from "preact-router";
 
-export default function Edit({ movies }) {
+export default function Edit({ movies, IP }) {
     const openPopup = () => {
         document.querySelector('.add-film-form').style.display = 'flex';
         document.body.style.overflow = 'hidden';
@@ -13,7 +13,7 @@ export default function Edit({ movies }) {
         const payload = {};
         checkboxes.forEach(cb => payload[cb.name] = cb.checked);
         
-        fetch('http://192.168.9.192:4090/change_st', {
+        fetch(`http://${IP}/change_st`, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(payload),
@@ -22,7 +22,7 @@ export default function Edit({ movies }) {
 
     const deleteItem = (e) => {
         if (confirm('Удалить этот фильм?')) {
-            fetch('http://192.168.9.192:4090/del', {
+            fetch(`http://${IP}/del`, {
                 method: 'DELETE',
                 headers: {'Content-Type': 'text/plain'},
                 body: e.target.textContent,
@@ -32,7 +32,7 @@ export default function Edit({ movies }) {
 
     return (
         <>
-            <AddFilmPopup />
+            <AddFilmPopup IP={IP} />
             <button onClick={() => openPopup()}>Добавить фильм</button>
             <form className="movie-list" onSubmit={(e) => statusChange(e)}>
                 {Object.keys(movies).map(name => (

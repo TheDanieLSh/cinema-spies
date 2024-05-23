@@ -24,7 +24,7 @@ const PORT = 3000;
 
 const handler = async (req) => {
     const url = new URL(req.url);
-    const filePath = url.pathname === "/" ? "./public/index.html" : `./public${url.pathname}`;
+    const filePath = url.pathname === "/" ? "./dist/index.html" : `./dist${url.pathname}`;
 
     try {
         const fileContent = await Deno.readFile(filePath);
