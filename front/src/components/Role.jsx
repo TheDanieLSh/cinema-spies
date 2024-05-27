@@ -16,7 +16,7 @@ export default function Role({ roles }) {
 
     const [role, setRole] = useState({ name: roles[x], index: x });
 
-    if (x > roles.length) route('/');
+    if (x == roles.length) route('/');
 
     useEffect(() => {
         return () => {
