@@ -2,7 +2,6 @@ import { useState } from "preact/hooks";
 import Role from "./Role";
 
 let numberOfPlayers = null;
-let givenRoleCount = 0;
 
 export default function Game({ movies, total }) {
     const [stage, setStage] = useState('player_number');

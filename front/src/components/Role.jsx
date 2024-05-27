@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks"
+import { useEffect, useState } from "preact/hooks"
 import { route } from "preact-router"
 
 let x = 0;
@@ -17,6 +17,12 @@ export default function Role({ roles }) {
     const [role, setRole] = useState({ name: roles[x], index: x });
 
     if (x > roles.length) route('/');
+
+    useEffect(() => {
+        return () => {
+            x = 0;
+        };
+    }, []);
 
     return (
         <div className="role" onClick={() => next()}>
